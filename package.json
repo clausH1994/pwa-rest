@@ -1,0 +1,19 @@
+{
+  "name": "pwa-rest",
+  "version": "1.0.0",
+  "description": "MongoDB-ExpressJS-NodeJS-RESTful-API",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "CH",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cross-env": "^7.0.3",
+    "dotenv-flow": "^3.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.5",
+    "mongoose": "^5.12.0"
+  }
+}

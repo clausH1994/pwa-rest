@@ -4,16 +4,19 @@
   "description": "MongoDB-ExpressJS-NodeJS-RESTful-API",
   "main": "server.js",
   "scripts": {
-    "start-dev" : "nodemon server.js",
+    "start-dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "CH",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "cross-env": "^7.0.3",
     "dotenv-flow": "^3.2.0",
     "express": "^4.17.1",
+    "joi": "^17.4.0",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.5",
     "mongoose": "^5.12.0"
   }

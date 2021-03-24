@@ -3,12 +3,18 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
 
+const userRoutes = require("./routes/user");
+const taskRoutes = require("./routes/task");
+const projectRoutes = require("./routes/project");
+
+const authRoutes = require("./routes/auth");
+
 require("dotenv-flow").config();
 
-app.get("/api/welcome", (req, res) => {
 
-    res.status(200).send({message: "Welcome to the PWA_Rest_API"});
-})
+app.use(bodyParser.json());
+
+
 
 mongoose.connect(
     process.env.DBHOST,
@@ -19,6 +25,19 @@ mongoose.connect(
 ).catch(error => console.log("Error connecting to MongoDB:" + error));
 
 mongoose.connection.once("open", () => console.log("Connected suscessfully  to MongoDB"));
+
+app.get("/api/welcome", (req, res) => {
+
+    res.status(200).send({message: "Welcome to the PWA_Rest_API"});
+})
+
+app.use("/api/users", userRoutes);
+
+app.use("/api/tasks", taskRoutes);
+
+app.use("/api/projects", projectRoutes);
+
+app.use("/api/users", authRoutes);
 
 const PORT = process.env.PORT || 4000;
 

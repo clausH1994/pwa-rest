@@ -1,0 +1,404 @@
+openapi: 3.0.0
+info:
+  title: PWA API
+  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+  version: 0.1.9
+servers:
+  - url: http://localhost:4000/api/
+    description: Optional server description, e.g. Main (production) server
+components:
+ securitySchemes:
+    ApiKeyAuth:        # arbitrary name for the security scheme
+      type: apiKey
+      in: header       # can be "header", "query" or "cookie"
+      name: auth-token
+
+scheemas:
+  Project:
+    type: object
+    properties:
+      type: 
+        type: string
+      name: 
+        type: string
+      description: 
+        type: string
+      timeStart: 
+        type: date
+      timeeEnd:
+        type: date
+      duration: 
+        type: number
+      stakeholder: 
+        type: string
+      Leader: 
+        type: string
+      members: 
+        type: array
+      tasks: 
+        type: array
+      status: 
+        type: string
+      date:
+        type: date
+    
+
+Task:
+   type: object
+    properties:
+      name: 
+        type: string
+      description: 
+        type: string
+      duration: 
+        type: number
+      assigned: 
+        type: string
+      priority: 
+        type: number
+      status: 
+        type: string
+      date: 
+        type: date,
+      
+        
+    
+
+    User:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        projects:
+          type: array
+        date:
+          type: string
+      
+paths:
+
+  /user/register:
+    post:
+      summary: Register a new User
+      description: Register a new User in the database
+      requestBody:
+        required: true
+        content: application/json:
+          schema:
+            $ref: "#/compontents/schemas/User"
+        
+      responses:
+        201:
+          description: User created succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+  
+  /user/login:
+    post:
+      summary: Login a User
+      description: Login a User in order to get JWT token (auth-token)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+        responses:
+          200:
+            description: User logged in succesfully
+            content:
+              application/json:
+               schema:
+                  type: object
+                  properties:
+                   error:
+                      type: string
+                  data:
+                      type: string
+
+
+  /projects:
+    get:
+      summary: Retrieves a list of Projects
+      description: retrieves a list of projects as json objects.
+      security:
+        - ApiKeyAuth: []  
+      responses:
+        200:
+          description: a list of project JSON objects in an array
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref "#/componets/schemas/Project"
+  
+  post:
+      summary: Create a new Project
+      description: Create a new Project
+      security:
+        - ApiKeyAuth: []      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Project"
+
+      responses:
+        201:
+          description: Project created succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+
+  /projects/{id}:
+    get:
+      summary: Specific Project
+      description: retrieves a Specific Project based on it id.
+       security:
+        - ApiKeyAuth: []  
+      parameters: in: path
+      name: id
+      required: true
+      description: mongoDB id
+      schema:
+        type: string
+      responses:
+        200:
+          description:  project JSON objects in an arra
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref "#/componets/schemas/Project"
+
+    put:
+      summary: Updates a specific Project
+      description: Updates a specific Project based on it id
+      security:
+        - ApiKeyAuth: []            
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: MongoDB id
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Project"
+
+      responses:
+        201:
+          description: Project updated succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+
+    delete:
+      summary: Deletes a specific Project
+      description: Deletes a specific Project based on it id
+      security:
+        - ApiKeyAuth: []            
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: MongoDB id
+          schema:
+            type: string      
+
+      responses:
+        201:
+          description: Project deleted succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+
+  /tasks:
+    get:
+      summary: Retrieves a list of tasks
+      description: retrieves a list of tasks as json objects.
+       security:
+        - ApiKeyAuth: []  
+      responses:
+        200:
+          description: a list of task JSON objects in an array
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref "#/componets/schemas/task"
+
+  /tasks/{id}:
+    get:
+      summary: Specific Task
+      description: retrieves a Specific Task based on it id.
+       security:
+        - ApiKeyAuth: []  
+      parameters: in: path
+      name: id
+      required: true
+      description: mongoDB id
+      schema:
+        type: string
+      responses:
+        200:
+          description: task JSON object
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref "#/componets/schemas/task"
+  put:
+      summary: Updates a specific task
+      description: Updates a specific task based on it id
+      security:
+        - ApiKeyAuth: []            
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: MongoDB id
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/task"
+
+      responses:
+        201:
+          description: task updated succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/task"
+
+  delete:
+      summary: Deletes a specific task
+      description: Deletes a specific task based on it id
+      security:
+        - ApiKeyAuth: []            
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: MongoDB id
+          schema:
+            type: string      
+
+      responses:
+        201:
+          description: task deleted succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/task"
+
+  /users:
+    get:
+      summary: Returns a list of users.
+      description: Optional extended description in CommonMark or HTML.
+       security:
+        - ApiKeyAuth: []  
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: string
+
+  /users/{id}:
+    get:
+      summary: Specific User
+      description: retrieves a Specific User based on it id.
+       security:
+        - ApiKeyAuth: []  
+      parameters: in: path
+      name: id
+      required: true
+      description: mongoDB id
+      schema:
+        type: string
+      responses:
+        200:
+          description: user JSON object
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref "#/componets/schemas/user"
+  put:
+      summary: Updates a specifuser
+      description: Updates a specific user based on it id
+      security:
+        - ApiKeyAuth: []            
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: MongoDB id
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/user"
+
+      responses:
+        201:
+          description: user updated succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+
+  delete:
+      summary: Deletes a specific user
+      description: Deletes a specific user based on it id
+      security:
+        - ApiKeyAuth: []            
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: MongoDB id
+          schema:
+            type: string      
+
+      responses:
+        201:
+          description: user deleted succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"

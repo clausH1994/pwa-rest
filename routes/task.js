@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const task = require("../models/task");
+const { verifyToken } = require("../validation");
 
-router.post("/", (req, res) => {
+router.post("/", verifyToken, (req, res) => {
 
     data = req.body;
 
@@ -12,7 +13,7 @@ router.post("/", (req, res) => {
     })
 });
 
-router.get("/", (req, res) => {
+router.get("/", verifyToken, (req, res) => {
 
     data = req.body;
 
@@ -23,7 +24,7 @@ router.get("/", (req, res) => {
     })
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", verifyToken, (req, res) => {
 
     data = req.body;
 
@@ -34,7 +35,7 @@ router.get("/:id", (req, res) => {
     })
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:id", verifyToken, (req, res) => {
 
     const id = req.params.id
 
@@ -51,7 +52,7 @@ router.put("/:id", (req, res) => {
 
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", verifyToken, (req, res) => {
 
     const id = req.params.id
 

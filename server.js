@@ -3,10 +3,15 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
 
+const swaggerUi = require('swagger-ui-express');
+const yaml = require('yamljs');
+
+const swaggerDefinition = yaml.load('./swagger.yaml');
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDefinition));
+
 const userRoutes = require("./routes/user");
 const taskRoutes = require("./routes/task");
 const projectRoutes = require("./routes/project");
-
 const authRoutes = require("./routes/auth");
 
 require("dotenv-flow").config();
@@ -31,11 +36,11 @@ app.get("/api/welcome", (req, res) => {
     res.status(200).send({message: "Welcome to the PWA_Rest_API"});
 })
 
-app.use("/api/users", userRoutes);
+app.use("/api/users",   userRoutes);
 
-app.use("/api/tasks", taskRoutes);
+app.use("/api/tasks",  taskRoutes);
 
-app.use("/api/projects", projectRoutes);
+app.use("/api/projects",  projectRoutes);
 
 app.use("/api/users", authRoutes);
 

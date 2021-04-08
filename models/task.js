@@ -3,11 +3,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 let taskSchema = new Schema({
-    task: {type:String},
+    name: {type:String},
     description: {type:String},
     duration: {type: Number},
     assigned: {type: String},
     priority: {type: Number},
+    status: {type: String},
     date: {
         type:Date,
         default:Date.now

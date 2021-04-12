@@ -22,44 +22,45 @@ describe('/First Test Collection', () => {
         done();
         });
     });
-
-    it('should verify that we have 0 users in the DB', (done) => {
-        chai.request(server)
-        .get('/api/users')
-        .end((err, res) => {
-        res.should.have.status(200);
-        res.body.should.be.a('array');
-        res.body.length.should.be.eql(0);
-        done();
-        });
-    })
-
     it('should POST a valid user', (done) => {
 
-        let user = {
-            name: "test name",
-            email: "test email",
-            password: "test password"
-        }
-        chai.request(server)
-        .post('/api/users/register')
-        .send(user)
-        .end((err, res) => {
-        res.should.have.status(200);
-        done();
-        });
-    })
+            let user = {
+                name: "test name",
+                email: "aa@aa.dk",
+                password: "testpassword"
+            }
+            chai.request(server)
+            .post('/api/users/register')
+            .send(user)
+            .end((err, res) => {
+            
+            
+            res.should.have.status(200);
+            chai.request(server)
+            .post('/api/users/login')
+            .send({
+                "email": "aa@aa.dk",
+                "password": "testpassword"
+            })
+            .end((err, res) => {
+                // Asserts                        
+                expect(res.status).to.be.equal(200);   
+                expect(res.body.error).to.be.equal(null);                        
+                let token = res.body.data.token;
 
-    it('should verify that we have 1 users in the DB', (done) => {
-        chai.request(server)
-        .get('/api/users')
-        .end((err, res) => {
-        res.should.have.status(200);
-        res.body.should.be.a('array');
-        res.body.length.should.be.eql(1);
-        done();
+                            chai.request(server)
+                            .get('/api/users')
+                            .set({ "auth-token": token })
+                            .end((err, res) => {
+                            res.should.have.status(200);
+                            res.body.should.be.a('array');
+                            res.body.length.should.be.eql(1);
+                            done();
+                            });
+            
+            });
         });
-    })
+    });
 
     it('should test two values.....',() => {
         let expectedVal = 10;

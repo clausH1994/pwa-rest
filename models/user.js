@@ -23,7 +23,7 @@ let userSchema = new Schema({
         max: 255
     },
     weekHours: {
-        type: Int32
+        type: Int32,
     },
     projects: {type:Array},
     date: {

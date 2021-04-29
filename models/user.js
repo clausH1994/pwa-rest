@@ -1,4 +1,4 @@
-const { Int32 } = require("bson");
+const { Int32, Double } = require("bson");
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
@@ -23,7 +23,7 @@ let userSchema = new Schema({
         max: 255
     },
     weekHours: {
-        type: Int32,
+        type:Double,
     },
     projects: {type:Array},
     date: {

@@ -22,8 +22,8 @@ let userSchema = new Schema({
         min: 6,
         max: 255
     },
-    weeklyHours: {
-        type:Double,
+    weekHours: {
+        type:Number,
     },
     projects: {type:Array},
     date: {

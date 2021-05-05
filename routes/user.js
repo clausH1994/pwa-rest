@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const user = require("../models/user");
 const { verifyToken } = require("../validation");
-
+const bcrypt = require('bcrypt');
 
 /* router.post("/", (req, res) => {
 
@@ -36,11 +36,17 @@ router.get("/:id", verifyToken, (req, res) => {
     })
 });
 
-router.put("/:id", verifyToken, (req, res) => {
+router.put("/:id", verifyToken, async (req, res) => {
 
-    const id = req.params.id
+    const id = req.params.id    
+
+    const salt = await bcrypt.genSalt(10);
+    const password = await bcrypt.hash(req.body.password, salt);
+
+    req.body.password = password;
 
     data = req.body;
+    
 
     user.findByIdAndUpdate(id, req.body).then(data => {
         if (!data) {

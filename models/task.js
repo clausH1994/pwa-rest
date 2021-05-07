@@ -7,7 +7,7 @@ let taskSchema = new Schema({
     description: {type:String},
     duration: {type: Number},
     assigned: {type: String},
-    priority: {type: Number},
+    priority: {type: String},
     status: {type: String},
     date: {
         type:Date,

@@ -50,7 +50,7 @@ router.put("/:id", verifyToken, async (req, res) => {
 
     user.findByIdAndUpdate(id, req.body).then(data => {
         if (!data) {
-            res.status(404).send({ message: "Cannotr update user with id=" + id + ". Maybe user was not found!" })
+            res.status(404).send({ message: "Cannot update user with id=" + id + ". Maybe user was not found!" })
         }
         else {
             res.send({ message: "User was successfully updated. " });

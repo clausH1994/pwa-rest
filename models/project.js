@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 let projectSchema = new Schema({
     name: {type:String},
     description: {type:String},
-    timeBegin: {type: Date},
-    timeeEnd: {type: Date},
+    timeBegin: {type: String},
+    timeeEnd: {type: String},
     duration: {type: Number},
     stakeholder: {type: String},
     cloud: {type: String},

@@ -13,7 +13,7 @@ let projectSchema = new Schema({
     github: {type: String},
     leader: {type: String},
     members: {type: Array},
-    tasks: {type: Array},
+    tasks: {type:Array},
     tech: {type:Array},
     status: {type: String},
     date: {

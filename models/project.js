@@ -13,6 +13,7 @@ let projectSchema = new Schema({
     Leader: {type: String},
     members: {type: Array},
     tasks: {type: Array},
+    tech: {type:Array},
     status: {type: String},
     date: {
         type:Date,

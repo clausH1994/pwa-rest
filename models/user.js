@@ -7,7 +7,7 @@ let userSchema = new Schema({
     name: {
         type:String,
         required: true,
-        min: 4,
+        min: 2,
         max: 255
         },
     email: {

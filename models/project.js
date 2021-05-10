@@ -6,7 +6,7 @@ let projectSchema = new Schema({
     name: {type:String},
     description: {type:String},
     timeBegin: {type: String},
-    timeeEnd: {type: String},
+    timeEnd: {type: String},
     duration: {type: Number},
     stakeholder: {type: String},
     cloud: {type: String},

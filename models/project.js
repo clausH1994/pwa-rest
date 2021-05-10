@@ -3,14 +3,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 let projectSchema = new Schema({
-    type: {type:String},
     name: {type:String},
     description: {type:String},
     timeBegin: {type: Date},
     timeeEnd: {type: Date},
     duration: {type: Number},
     stakeholder: {type: String},
-    Leader: {type: String},
+    cloud: {type: String},
+    github: {type: String},
+    leader: {type: String},
     members: {type: Array},
     tasks: {type: Array},
     tech: {type:Array},

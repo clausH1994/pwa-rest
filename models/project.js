@@ -15,7 +15,6 @@ let projectSchema = new Schema({
     members: {type: Array},
     tasks: {type:Array},
     tech: {type:Array},
-    jibberish: {type: Array},
     status: {type: String},
     date: {
         type:Date,

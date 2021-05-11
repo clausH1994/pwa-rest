@@ -25,6 +25,9 @@ let userSchema = new Schema({
     weekHours: {
         type:Number,
     },
+    role:{
+        type:String
+    },
     projects: {type:Array},
     date: {
         type:Date,

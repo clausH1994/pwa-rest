@@ -27,7 +27,7 @@ describe('/First Test Collection', () => {
             let user = {
                 name: "test name",
                 email: "aa@aa.dk",
-                weekHours: 22,
+                weekHours: "22",
                 role: "test?",
                 password: "testpassword"
             }

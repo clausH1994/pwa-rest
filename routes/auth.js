@@ -24,8 +24,8 @@ router.post("/register", async (req, res) => {
     const userObject = new User({
         name: req.body.name,
         email: req.body.email,
-        role: req.body.role,
         weekHours: req.body.weekHours,
+        role: req.body.role,
         password
     });
 

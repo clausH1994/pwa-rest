@@ -25,7 +25,7 @@ router.post("/register", async (req, res) => {
         name: req.body.name,
         email: req.body.email,
         role: req.body.role,
-        weekHours: req.body.weekhours,
+        weekHours: req.body.weekHours,
         password
     });
 

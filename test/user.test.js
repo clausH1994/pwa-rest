@@ -28,6 +28,7 @@ describe('/First Test Collection', () => {
                 name: "test name",
                 email: "aa@aa.dk",
                 role: "test?",
+                weekHours: 22,
                 password: "testpassword"
             }
             chai.request(server)

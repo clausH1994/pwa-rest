@@ -44,12 +44,12 @@ router.put("/:id", verifyToken, (req, res) => {
 
     project.findByIdAndUpdate(id, req.body).then(data => {
         if (!data) {
-            res.status(404).send({ message: "Cannotr update user with id=" + id + ". Maybe user was not found!" })
+            res.status(404).send({ message: "Cannotr update Project with id=" + id + ". Maybe Project was not found!" })
         }
         else {
-            res.send({ message: "User was successfully updated. " });
+            res.send({ message: "Project was successfully updated. " });
         }
-    }).catch(err => { res.status(500).send({ message: "error updating user with id=" + id}); })
+    }).catch(err => { res.status(500).send({ message: "error updating Project with id=" + id}); })
 
 });
 
@@ -61,12 +61,12 @@ router.delete("/:id",  verifyToken, (req, res) => {
 
     project.findByIdAndDelete(id).then(data => {
         if (!data) {
-            res.status(404).send({ message: "Cannotr delete user with id=" + id + ". Maybe user was not found!" })
+            res.status(404).send({ message: "Cannotr delete Project with id=" + id + ". Maybe Project was not found!" })
         }
         else {
-            res.send({ message: "User was successfully deleted. " });
+            res.send({ message: "Project was successfully deleted. " });
         }
-    }).catch(err => { res.status(500).send({ message: "error deleting User with id=" + id}); })
+    }).catch(err => { res.status(500).send({ message: "error deleting Project with id=" + id}); })
 
 });
 

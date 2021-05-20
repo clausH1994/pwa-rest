@@ -38,15 +38,15 @@ router.get("/:id", verifyToken, (req, res) => {
 
 router.put("/:id", verifyToken, async (req, res) => {
 
-    const id = req.params.id    
-
-    const salt = await bcrypt.genSalt(10);
-    const password = await bcrypt.hash(req.body.password, salt);
-
-    req.body.password = password;
-
-    data = req.body;
+    const id = req.params.id
+    if (req.body.password) {
+        const salt = await bcrypt.genSalt(10);
+        const password = await bcrypt.hash(req.body.password, salt);
+        req.body.password = password;
+    }
     
+    data = req.body;
+
 
     user.findByIdAndUpdate(id, req.body).then(data => {
         if (!data) {
